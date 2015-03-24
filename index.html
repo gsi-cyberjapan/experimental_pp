@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>地理院ベクトルタイル提供実験（単写真）</title>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css"/>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script src="./TileLayer.GeoJSON.js"></script>
+<style>
+body {padding: 0; margin: 0}
+html, body, #mapdiv {height: 100%; width: 100%;}
+.leaflet-container {background: #fff;}
+</style>
+</head>
+<body>
+<div id="mapdiv">
+<script>
+var std = L.tileLayer(
+'http://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',
+{attribution: "地理院タイル（標準地図）", 
+maxNativeZoom: 18, maxZoom: 18, opacity:0.5});
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'http://cyberjapandata.gsi.go.jp/xyz/pp/style.js', false);
+xhr.send(null);
+var stylejs = eval( "(" + xhr.responseText + ")" );
+
+var pplayer = new L.TileLayer.GeoJSON(
+'http://cyberjapandata.gsi.go.jp/xyz/pp/{z}/{x}/{y}.geojson',
+stylejs.options,stylejs.geojsonOptions);
+
+var map = L.map('mapdiv', {
+center: [35.69538,139.81406], zoom: 15, layers: [std,pplayer]});
+
+L.control.scale({imperial: false}).addTo(map);
+
+var baseLayers = {"地理院タイル（標準地図）": std};
+var overlays = {'単写真': pplayer};
+
+L.control.layers(baseLayers, overlays,{position:'topright',collapsed:false}).addTo(map);
+
+</script>
+</body>
+</html>
