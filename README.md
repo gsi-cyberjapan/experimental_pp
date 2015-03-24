@@ -1,4 +1,4 @@
-# experimental_pp
+experimental_pp
 ================
 国土地理院ベクトルタイル提供実験（単写真）
 # 単写真の GeoJSON タイル
