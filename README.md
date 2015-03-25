@@ -17,7 +17,7 @@ experimental_pp
 
 # デモサイト
 地理院地図
-http://maps.gsi.go.jp/?ll=35.708294,139.75487&z=15&base=std&ls=pp&vs=c0j0l0u0&d=l
+http://maps.gsi.go.jp/?ll=34.740555,135.336199&z=15&base=std&ls=pp&vs=c0j0l0u0
 
 github
 http://gsi-cyberjapan.github.io/experimental_pp/
